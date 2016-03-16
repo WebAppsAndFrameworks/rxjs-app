@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/WebAppsAndFrameworks/rxjs-app#readme",
   "dependencies": {
+    "d3": "^3.5.16",
+    "jquery": "^2.2.1",
+    "mousetrap": "^1.5.3",
     "rx": "^4.1.0"
   }
 }
