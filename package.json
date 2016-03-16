@@ -1,0 +1,22 @@
+{
+  "name": "rxjs-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WebAppsAndFrameworks/rxjs-app.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WebAppsAndFrameworks/rxjs-app/issues"
+  },
+  "homepage": "https://github.com/WebAppsAndFrameworks/rxjs-app#readme",
+  "dependencies": {
+    "rx": "^4.1.0"
+  }
+}
