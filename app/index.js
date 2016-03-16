@@ -2,7 +2,7 @@ var Rx = require('rx');
 require('rx-dom');
 var $ = require('jquery');
 
-Rx.DOM.ajax({
+var response = Rx.DOM.ajax({
   responseType: 'json',
   url: 'https://stream.twitter.com/1.1/statuses/sample.json',
   headers: {
@@ -16,8 +16,9 @@ Rx.DOM.ajax({
     // ].join(', ')
      Authorization: 'OAuth oauth_consumer_key="XqLCEr44ah5fPOszDC7eNjo6X", oauth_nonce="5d1a724023581e22401408af138b81bb", oauth_signature="w2uZgEOD%2FJfzFUcHVED7KOYhMQQ%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1458162001", oauth_token="52961768-EI4J2NdSC5STCBbwf38qCZka03VcPGtfXACBG176H", oauth_version="1.0"'
   }
-})
-.subscribe(
+});
+
+var subscription = response.subscribe(
   function (data) {
     data.response.forEach(function (twt) {
       console.log(twt);
