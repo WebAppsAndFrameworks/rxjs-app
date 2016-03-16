@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack app/index.js build/bundle.js",
-    "watch": "webpack app/index.js build/bundle.js --watch"
+    "watch": "webpack app/index.js build/bundle.js --watch",
+    "serve": "webpack-dev-server --content-base build/"
   },
   "repository": {
     "type": "git",
