@@ -3,4 +3,4 @@
 node_modules
 
 # Ignore the compiled JS file
-build\bundle.js
+build/bundle.js
