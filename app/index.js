@@ -2,7 +2,7 @@ var Rx = require('rx');
 require('rx-dom');
 var $ = require('jquery');
 
-var response = Rx.DOM.ajax({
+var Rxhr = Rx.DOM.ajax({
   responseType: 'json',
   url: 'https://stream.twitter.com/1.1/statuses/sample.json',
   headers: {
@@ -17,7 +17,9 @@ var response = Rx.DOM.ajax({
   }
 });
 
-var subscription = response.subscribe(
+
+var subscription; 
+subscription = Rxhr.subscribe(
   function (data) {
     data.response.forEach(function (twt) {
       console.log(twt);
@@ -25,6 +27,19 @@ var subscription = response.subscribe(
   },
   function (err) {
     console.log(err);
+    useTestData();
   }
 );
+
+
+function useTestData(){
+    var p = Promise.resolve(window.testData);
+    subscription = Rx.Observable.fromPromise(p).subscribe(
+        function (data) {
+            data.response.forEach(function (twt) {
+                console.log(twt);
+            });
+        }
+    );    
+}
 
