@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack app/index.js build/bundle.js",
+    "watch": "webpack app/index.js build/bundle.js --watch"
   },
   "repository": {
     "type": "git",
