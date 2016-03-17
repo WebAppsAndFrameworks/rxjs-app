@@ -1,3 +1,5 @@
+@import "~normalize.css/normalize.css";
+
 // Colors
 //$bg-color: rgba(69,217,253,1);
 // $color: rgba(34,34,34,1);
@@ -27,18 +29,18 @@ html, body {
 }
 
 #search {
-  display: block;
-  width: 100%;
-  max-width: 600px;
   font-size: 34px;
   line-height: 44px;
+}
+
+input {
+  width: 350px;
   background: 0 0;
   border: none;
   border-bottom: 1px dotted $color-40;
   padding: 5px 0;
   border-radius: 0;
   color: $color;
-  margin: auto;
 
   &:focus {
     outline: 0;
