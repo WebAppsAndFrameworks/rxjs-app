@@ -52,6 +52,8 @@ comboUp.subscribe(function(x) {
           });
 
           player.src(item.images.fixed_height.mp4);
+
+          video.classList.add('vjs-default-skin', 'vjs-big-play-centered');
           view.append(video);
         });
       });
