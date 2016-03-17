@@ -23,8 +23,20 @@ var comboUp = Rx.Observable.combineLatest(
 comboUp.subscribe(function(x) {
   Rx.DOM.ajax({ url: GIPHY.searchUri + x.join('+') + '&api_key=' + GIPHY.apiKey })
     .subscribe(
-      function giphySuccess(data) {
-        console.log(data);
+      function giphySuccess(results) {
+        console.log(results);
+
+        var view = $('#view');
+        data = JSON.parse(results.response).data;
+
+        view.html = "";
+
+        data.forEach(function(item) {
+            var video = document.creatElement("VIDEO");
+            video.src = item.src;
+            view.appendChild(video);
+        });
+
       },
       function giphyError(error) {
         console.log(error);
