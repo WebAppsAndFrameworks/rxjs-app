@@ -3,6 +3,7 @@ require('./main.scss');
 var Rx = require('rx');
 require('rx-dom');
 var $ = require('jquery');
+var videojs = require('videojs');
 
 var GIPHY = {
   searchUri: 'http://api.giphy.com/v1/gifs/search?q=',
@@ -31,10 +32,28 @@ comboUp.subscribe(function(x) {
 
       var view = $('#view').html('');
       results.response.data.forEach(function(item) {
-          var video = document.createElement('video');
-          video.controls = true;
-          video.src = item.images.fixed_height.mp4;
+        var video = document.createElement('video');
+        video.classList.add('vjs-big-play-centered');
+        videojs(video, {
+          'autoload': 'auto',
+          'controls': true,
+          'loop': true
+        }, function() {
+          var player = this;
+
+          player.bigPlayButton.show();
+
+          player.on('pause', function() {
+            player.bigPlayButton.show();
+          });
+
+          player.on('play', function() {
+            player.bigPlayButton.hide();
+          });
+
+          player.src(item.images.fixed_height.mp4);
           view.append(video);
+        });
       });
     },
     function giphyError(error) {
@@ -74,6 +93,5 @@ function observableFromInput(inputElement){
 //                 console.log(twt);
 //             });
 //         }
-//     );    
+//     );
 // }
-

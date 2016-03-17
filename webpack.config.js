@@ -7,10 +7,20 @@ var config = {
     filename: 'bundle.js'
   },
   module: {
-    loaders: [{
-      test: /\.scss$/,
-      loaders: ["style", "css", "sass"]
-    }]
+    loaders: [
+      {
+        test: /\.scss$/,
+        loaders: ['style', 'css', 'sass']
+      },
+      {
+        test: /\.svg$/,
+        loaders: ['url-loader', 'svg-loader']
+      },
+      {
+        test: /\.(?:eot|ttf|woff)$/,
+        loaders: ['url-loader']
+      }
+    ]
   }
 };
 
