@@ -27,8 +27,14 @@ var nounUp = Rx.Observable.fromEvent($noun, 'keyup')
   .debounce(750)
   .distinctUntilChanged();
 
-adjectiveUp.subscribe(function(x) { console.log(x); });
-nounUp.subscribe(function(x) { console.log(x); });
+var comboUp = 
+  Rx.Observable.combineLatest(
+    adjectiveUp,
+    nounUp
+  );
+
+
+comboUp.subscribe(function(x) { console.log(x); });
 
 
 
