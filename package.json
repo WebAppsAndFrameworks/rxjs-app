@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
-    "serve": "webpack-dev-server --content-base build/"
+    "serve": "webpack-dev-server --watch --content-base build/"
   },
   "repository": {
     "type": "git",
