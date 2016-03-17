@@ -4,6 +4,11 @@ var Rx = require('rx');
 require('rx-dom');
 var $ = require('jquery');
 
+var GIPHY = {
+  searchUri: 'http://api.giphy.com/v1/gifs/search?q=',
+  apiKey: 'dc6zaTOxFJmzC'
+}
+
 var $adjective = $('#adjective'),
     $noun = $('#noun');
 
@@ -33,10 +38,16 @@ var comboUp =
     nounUp
   );
 
-
-comboUp.subscribe(function(x) { console.log(x); });
-
-
+comboUp.subscribe(function(x) {
+  Rx.DOM.ajax({ url: GIPHY.searchUri + x.join('+') + '&api_key=' + GIPHY.apiKey })
+    .subscribe(
+      function giphySuccess(data) {
+        console.log(data);
+      },
+      function giphyError(error) {
+        console.log(error);
+      });
+});
 
 // var subscription; 
 // subscription = Rxhr.subscribe(
