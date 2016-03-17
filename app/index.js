@@ -29,13 +29,10 @@ comboUp.subscribe(function(x) {
     function giphySuccess(results) {
       console.log(results);
 
-      var view = $('#view');
-      data = results.response.data;
-
-      view.html('');
-
-      data.forEach(function(item) {
+      var view = $('#view').html('');
+      results.response.data.forEach(function(item) {
           var video = document.createElement('video');
+          video.controls = true;
           video.src = item.images.fixed_height.mp4;
           view.append(video);
       });
