@@ -33,6 +33,27 @@ html, body {
   line-height: 44px;
 }
 
+#view {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  align-content: flex-start;
+
+  .placeholder {
+    height: 350px;
+    width: 400px;
+  }
+
+}
+
+#view > * {
+  flex: none;
+  border: solid green 2px;
+}
+
+
 input {
   width: 350px;
   background: 0 0;
