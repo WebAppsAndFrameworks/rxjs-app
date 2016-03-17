@@ -21,26 +21,28 @@ var comboUp = Rx.Observable.combineLatest(
 );
 
 comboUp.subscribe(function(x) {
-  Rx.DOM.ajax({ url: GIPHY.searchUri + x.join('+') + '&api_key=' + GIPHY.apiKey })
-    .subscribe(
-      function giphySuccess(results) {
-        console.log(results);
+  Rx.DOM.ajax({
+    url: GIPHY.searchUri + x.join('+') + '&api_key=' + GIPHY.apiKey,
+    responseType: 'json'
+  })
+  .subscribe(
+    function giphySuccess(results) {
+      console.log(results);
 
-        var view = $('#view');
-        data = JSON.parse(results.response).data;
+      var view = $('#view');
+      data = results.response.data;
 
-        view.html = "";
+      view.html('');
 
-        data.forEach(function(item) {
-            var video = document.creatElement("VIDEO");
-            video.src = item.src;
-            view.appendChild(video);
-        });
-
-      },
-      function giphyError(error) {
-        console.log(error);
+      data.forEach(function(item) {
+          var video = document.createElement('video');
+          video.src = item.images.fixed_height.mp4;
+          view.append(video);
       });
+    },
+    function giphyError(error) {
+      console.log(error);
+    });
 });
 
 function observableFromInput(inputElement){
@@ -54,7 +56,7 @@ function observableFromInput(inputElement){
       .debounce(750);
 }
 
-// var subscription; 
+// var subscription;
 // subscription = Rxhr.subscribe(
 //   function (data) {
 //     data.response.forEach(function (twt) {
