@@ -4,11 +4,18 @@ var Rx = require('rx');
 require('rx-dom');
 var $ = require('jquery');
 var videojs = require('videojs');
+require('masonry-layout');
 
 var GIPHY = {
   searchUri: 'http://api.giphy.com/v1/gifs/search?q=',
   apiKey: 'dc6zaTOxFJmzC'
 }
+
+var $view = $('#view');
+var msnry = new Masonry($view[0], {
+  itemSelector: '.gif'
+});
+
 
 var $adjective = $('#adjective'),
     $noun = $('#noun');
@@ -31,28 +38,33 @@ comboUp.subscribe(function(x) {
       console.log(results);
 
       var view = $('#view').html('');
+
       results.response.data.forEach(function(item) {
-        var video = document.createElement('video');
-        video.classList.add('vjs-big-play-centered');
-        videojs(video, {
-          'autoload': 'auto',
-          'controls': true,
-          'loop': true
-        }, function() {
-          var player = this;
+        var video = $('<video/>');
+        videojs(video[0], {
+            'preload': 'auto',
+            'controls': true,
+            'loop': true
+          }, function() {
+            var player = this;
 
-          player.bigPlayButton.show();
-
-          player.on('pause', function() {
             player.bigPlayButton.show();
-          });
 
-          player.on('play', function() {
-            player.bigPlayButton.hide();
-          });
+            player.on('pause', function() {
+              player.bigPlayButton.show();
+            });
 
-          player.src(item.images.fixed_height.mp4);
-          view.append(video);
+            player.on('play', function() {
+              player.bigPlayButton.hide();
+            });
+
+            player.src(item.images.fixed_width.mp4);
+            video.addClass('gif')
+              .addClass('video-js')
+              .addClass('vjs-big-play-centered')
+              .addClass('vjs-default-skin');
+
+            view.append(video);
         });
       });
     },
