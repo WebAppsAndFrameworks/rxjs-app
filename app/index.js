@@ -4,17 +4,11 @@ var Rx = require('rx');
 require('rx-dom');
 var $ = require('jquery');
 var videojs = require('videojs');
-require('masonry-layout');
 
 var GIPHY = {
   searchUri: 'http://api.giphy.com/v1/gifs/search?q=',
   apiKey: 'dc6zaTOxFJmzC'
-}
-
-var $view = $('#view');
-var msnry = new Masonry($view[0], {
-  itemSelector: '.gif'
-});
+};
 
 
 var $adjective = $('#adjective'),
@@ -41,7 +35,6 @@ comboUp.subscribe(function(x) {
 
       results.response.data.forEach(function(item) {
         var video = $('<video/>');
-        view.append(video);
         videojs(video[0], {
             'preload': 'auto',
             'controls': true,
@@ -64,6 +57,7 @@ comboUp.subscribe(function(x) {
               .addClass('video-js')
               .addClass('vjs-big-play-centered')
               .addClass('vjs-default-skin');
+            view.append(video);
         });
       });
     },
