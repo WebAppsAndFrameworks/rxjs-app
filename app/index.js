@@ -41,6 +41,7 @@ comboUp.subscribe(function(x) {
 
       results.response.data.forEach(function(item) {
         var video = $('<video/>');
+        view.append(video);
         videojs(video[0], {
             'preload': 'auto',
             'controls': true,
@@ -63,8 +64,6 @@ comboUp.subscribe(function(x) {
               .addClass('video-js')
               .addClass('vjs-big-play-centered')
               .addClass('vjs-default-skin');
-
-            view.append(video);
         });
       });
     },
