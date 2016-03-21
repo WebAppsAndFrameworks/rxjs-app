@@ -116,3 +116,14 @@ input {
 .nowrap {
   white-space: nowrap;
 }
+
+.vjs-control-bar, .vjs-caption-settings, .vjs-error-display, .vjs-loading-spinner, .vjs-poster {
+  display: none !important;
+}
+
+.vjs-error .vjs-error-display {
+  display: none;
+}
+.vjs-default-skin.vjs-has-started .vjs-big-play-button {
+  display: block !important;
+}
