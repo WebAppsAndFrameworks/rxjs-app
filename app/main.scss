@@ -2,7 +2,7 @@
 @import "~videojs/dist/video-js/video-js.css";
 
 // Colors
-//$bg-color: rgba(69,217,253,1);
+// $bg-color: rgba(69,217,253,1);
 // $color: rgba(34,34,34,1);
 // $color-40: rgba(34,34,34,0.4);
 $bg-color: rgba(241,64,75,1);
@@ -54,9 +54,14 @@ html, body {
   column-gap: 0;
 }
 
-#view > * {
+#view > div {
   width: 100% !important;
   height: auto !important;
+  position: relative;
+
+  video {
+    width: 100%;
+  }
 }
 
 @media (max-width: $medium) {
@@ -68,9 +73,9 @@ html, body {
 }
 @media (max-width: $small) {
   #view {
-  -moz-column-count:    1;
-  -webkit-column-count: 1;
-  column-count:         1;
+    -moz-column-count:    1;
+    -webkit-column-count: 1;
+    column-count:         1;
   }
 }
 
@@ -93,19 +98,19 @@ input {
 }
 
 ::-webkit-input-placeholder {
-   color: $color-40;
+  color: $color-40;
 }
 
 :-moz-placeholder { /* Firefox 18- */
-   color: $color-40;
+  color: $color-40;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: $color-40;
+  color: $color-40;
 }
 
-:-ms-input-placeholder {  
-   color: $color-40;
+:-ms-input-placeholder {
+  color: $color-40;
 }
 
 .nowrap {
