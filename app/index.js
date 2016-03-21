@@ -10,7 +10,6 @@ var GIPHY = {
   apiKey: 'dc6zaTOxFJmzC'
 };
 
-
 var $adjective = $('#adjective'),
     $noun = $('#noun');
 
@@ -29,19 +28,17 @@ comboUp.subscribe(function(x) {
   })
   .subscribe(
     function giphySuccess(results) {
-      console.log(results);
-
       var view = $('#view').html('');
 
       results.response.data.forEach(function(item) {
-        var video = $('<video/>');
+        var video = $('<video/>').appendTo(view);
+
         videojs(video[0], {
             'preload': 'auto',
             'controls': true,
             'loop': true
           }, function() {
             var player = this;
-
             player.bigPlayButton.show();
 
             player.on('pause', function() {
@@ -52,12 +49,11 @@ comboUp.subscribe(function(x) {
               player.bigPlayButton.hide();
             });
 
+            video[0]
+              .parentNode
+              .classList.add('vjs-default-skin', 'vjs-big-play-centered');
+
             player.src(item.images.fixed_width.mp4);
-            video.addClass('gif')
-              .addClass('video-js')
-              .addClass('vjs-big-play-centered')
-              .addClass('vjs-default-skin');
-            view.append(video);
         });
       });
     },
