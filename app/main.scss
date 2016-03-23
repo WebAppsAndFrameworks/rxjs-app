@@ -125,6 +125,10 @@ input {
   display: none;
 }
 
+.vjs-default-skin.vjs-has-started .vjs-big-play-button {
+  display: block;
+}
+
 .vjs-default-skin.vjs-big-play-centered div.vjs-big-play-button {
   height: 50px;
   width: 50px;
