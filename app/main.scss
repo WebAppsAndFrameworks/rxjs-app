@@ -124,6 +124,17 @@ input {
 .vjs-error .vjs-error-display {
   display: none;
 }
-.vjs-default-skin.vjs-has-started .vjs-big-play-button {
-  display: block !important;
+
+.vjs-default-skin.vjs-big-play-centered div.vjs-big-play-button {
+  height: 50px;
+  width: 50px;
+  top: 50%;
+  left: 50%;
+  margin-left: -25px;
+  margin-top: -25px;
+
+  &:before {
+    line-height: 50px;
+    margin-left: 5px;
+  }
 }
