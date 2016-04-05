@@ -3,7 +3,7 @@ require('./main.scss');
 var Rx = require('rx');
 require('rx-dom');
 var $ = require('jquery');
-var videojs = require('videojs');
+var videojs = require('video.js');
 
 var GIPHY = {
   searchUri: 'http://api.giphy.com/v1/gifs/search?q=',
