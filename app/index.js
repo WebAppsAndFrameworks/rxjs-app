@@ -21,46 +21,10 @@ var comboUp = Rx.Observable.combineLatest(
   nounUp
 );
 
-comboUp.subscribe(function(x) {
-  Rx.DOM.ajax({
-    url: GIPHY.searchUri + x.join('+') + '&api_key=' + GIPHY.apiKey,
-    responseType: 'json'
-  })
-  .subscribe(
-    function giphySuccess(results) {
-      var view = $('#view').html('');
+var isTestEnviornment = window.location.search && window.location.search.indexOf("test") >= 0;
+var fn = getMainCallback(isTestEnviornment);
 
-      results.response.data.forEach(function(item) {
-        var video = $('<video/>').appendTo(view);
-
-        videojs(video[0], {
-            'preload': 'auto',
-            'controls': true,
-            'loop': true
-          }, function() {
-            var player = this;
-            player.bigPlayButton.show();
-
-            player.on('pause', function() {
-              player.bigPlayButton.show();
-            });
-
-            player.on('play', function() {
-              player.bigPlayButton.hide();
-            });
-
-            video[0]
-              .parentNode
-              .classList.add('vjs-default-skin', 'vjs-big-play-centered');
-
-            player.src(item.images.fixed_width.mp4);
-        });
-      });
-    },
-    function giphyError(error) {
-      console.log(error);
-    });
-});
+comboUp.subscribe(fn);
 
 function observableFromInput(inputElement){
   return Rx.Observable.fromEvent(inputElement, 'keyup')
@@ -71,6 +35,55 @@ function observableFromInput(inputElement){
         return text.length > 2;
       })
       .debounce(750);
+}
+
+function getMainCallback(isTestEnviornment){
+  if(isTestEnviornment){
+    return function test(x) {
+          console.log(x);
+        };
+  } else {
+    return function searchGIPHY(x) {
+      Rx.DOM.ajax({
+        url: GIPHY.searchUri + x.join('+') + '&api_key=' + GIPHY.apiKey,
+        responseType: 'json'
+      })
+      .subscribe(
+        function giphySuccess(results) {
+          var view = $('#view').html('');
+
+          results.response.data.forEach(function(item) {
+            var video = $('<video/>').appendTo(view);
+
+            videojs(video[0], {
+                'preload': 'auto',
+                'controls': true,
+                'loop': true
+              }, function() {
+                var player = this;
+                player.bigPlayButton.show();
+
+                player.on('pause', function() {
+                  player.bigPlayButton.show();
+                });
+
+                player.on('play', function() {
+                  player.bigPlayButton.hide();
+                });
+
+                video[0]
+                  .parentNode
+                  .classList.add('vjs-default-skin', 'vjs-big-play-centered');
+
+                player.src(item.images.fixed_width.mp4);
+            });
+          });
+        },
+        function giphyError(error) {
+          console.log(error);
+        });
+    };
+  }
 }
 
 // var subscription;
