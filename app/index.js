@@ -24,12 +24,10 @@ var comboUp = Rx.Observable.combineLatest(
   nounUp
 );
 
-
-
 comboUp.subscribe(
-  (x) => {
+  x => {
     notifyLatestCombo(x);
-    if(!isTestEnviornment){
+    if (!isTestEnviornment) {
       // Call the web API
       searchGIPHY(x);
     }
@@ -78,9 +76,12 @@ function searchGIPHY(x) {
   );
 }
 
-function notifyLatestCombo(x) {
-  var event = document.createEvent('Event');  
-  event.initEvent('latestcombo', true, false);  
+function notifyLatestCombo(combo) {
+  var event = new CustomEvent('latestcombo', { 
+    'detail': {'combo': combo},
+    'bubbles': true,
+    'cancelable': false,
+  });
   appElement.dispatchEvent(event);        
 }
 
